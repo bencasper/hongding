@@ -1,3 +1,5 @@
+#!python
+# -*- coding: utf-8 -*-
 """
 Django settings for hongding project.
 
@@ -30,7 +32,7 @@ ALLOWED_HOSTS = []
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'http://www.hongdingenv.com'
 
 
 # Application definition
@@ -105,12 +107,30 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
 
-LANGUAGE_CODE = 'en-gb'
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'zh-CN'
+TIME_ZONE = 'Asia/Shanghai'
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
 USE_I18N = True
+
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
+# Note that with this set to True, Wagtail will fall back on using numeric dates
+# in date fields, as opposed to 'friendly' dates like "24 Sep 2013", because
+# Python's strptime doesn't support localised month names: https://code.djangoproject.com/ticket/13339
 USE_L10N = True
+
+# If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+
+DATE_FORMAT = 'Y-F-j'
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -151,7 +171,7 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 LOGIN_URL = 'wagtailadmin_login'
 LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
-WAGTAIL_SITE_NAME = "hongding"
+WAGTAIL_SITE_NAME = "鸿鼎环保"
 
 # Use Elasticsearch as the search backend for extra performance and better search results:
 # http://wagtail.readthedocs.org/en/latest/howto/performance.html#search
