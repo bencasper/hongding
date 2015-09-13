@@ -1,0 +1,19 @@
+{% load wagtailimages_tags static wagtailembeds_tags %}
+
+
+<div id="carousel-container">
+
+
+    <div id="carousel">
+        {% for carousel_item in carousels %}
+            {% image carousel_item.image max-540x240 as carouselimagedata %}
+            <img src="{{ carouselimagedata.url }}" alt="{{ carouselimagedata.alt }}" id="item-{{ forloop.counter }}"
+                 width=540 height=240/>
+        {% endfor %}
+    </div>
+
+    <a href="#" id="lbt"><img src="{% static "images/lbt.jpg" %}" ></a>
+    <a href="#" id="rbt"><img src="{% static "images/rbt.jpg" %}" ></a>
+
+</div>
+

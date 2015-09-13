@@ -1,5 +1,4 @@
-{% load compress static wagtailuserbar %}
-
+{% load core_tags compress static wagtailuserbar %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -8,14 +7,14 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+        <title>鸿鼎环保科技有限公司 | 打造环保行业领军企业</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="{% static "js/carousel/jquery.waterwheelCarousel.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/carousel/mycarousel.js"%}"></script>
 
-        {% compress css %}
-            
-            <link rel="stylesheet" type="text/x-scss" href="{% static 'css/hongding.scss' %}">
-        {% endcompress %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'css/hongding.css' %}">
 
         {% block extra_css %}
             
@@ -23,9 +22,36 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+        <div id="top-container">
 
-        {% block content %}{% endblock %}
+            <div class="logo">
+                <a href="http://www.hongdingenv.com">
+                  <img style="position:absolute;top:-25px;left:80px;z-index:999;" src="{% static "images/hd-logo.png" %}" width="116" height="103">
+                </a>
+            </div>
+            {% block menu %}
+                {% get_site_root as site_root %}
+                {% top_menu parent=site_root calling_page=self %}
+            {% endblock %}
+
+            {% carousels %}
+        </div>
+        <div class="main container">
+
+            {% breadcrumbs %}
+
+            {% block heading %}
+                <div class="page-header">
+                    <h1>{{ self.title }}</h1>
+                </div>
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+
+
+        </div>
+
+        {% adverts %}
 
         {% compress js %}
             

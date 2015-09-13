@@ -1,0 +1,171 @@
+@charset "utf-8";
+* {
+    margin: 0;
+}
+
+div, ul, li, ol, p, span, em, i, dl, dt, dd, from, input, h1, h3, h2, img {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #000000;
+    font-family: "宋体";
+    font-size: 14px;
+    margin: 0;
+}
+
+ul, li {
+
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0 none;
+}
+
+h2 {
+    font-family: "微软雅黑";
+    font-size: 13px;
+}
+
+h3 {
+    font-size: 13px;
+}
+
+h2 span {
+    color: #356FDB;
+    padding-left: 5px;
+}
+
+.l {
+    float: left;
+}
+
+.r {
+    float: right;
+}
+
+.c {
+    clear: both;
+}
+
+a:link {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF0000;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+#top-container {
+    background: url("../images/top_bg.jpg") no-repeat scroll center top transparent;
+    padding-top: 10px;
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+
+.logo {
+    top:30px;
+    left: 100px;
+    height: 58px;
+    width: 195px;
+    position: absolute;
+
+}
+
+.nav-container {
+    padding-top: 30px;
+    padding-left: 350px;
+    height: 45px;
+    width: 768px;
+}
+
+.navigation {
+    background: url("../images/menu_c.jpg") repeat-x scroll 0 0 transparent;
+    float: left;
+    height: 45px;
+    overflow: hidden;
+    width: 747px;
+}
+
+.navigation ul {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    width: 747px;
+}
+
+.navigation ul li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 93px;
+}
+
+.navigation ul li a:link, .nav1 ul li a:active, .nav1 ul li a:visited {
+    color: #FFFFFF;
+    font-size: 12px;
+    height: 38px;
+    line-height: 38px;
+}
+
+.navigation ul li a:hover {
+    background: url("../images/menu_hover.jpg") no-repeat scroll center top transparent;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    width: 93px;
+}
+
+#carousel-container {
+    width: 960px;
+    padding-left: 150px;
+    padding-top: 50px;
+}
+
+#carousel {
+    width: 960px;
+    height: 240px;
+    position: relative;
+    clear: both;
+    overflow: hidden;
+}
+
+#carousel img {
+    visibility: hidden; /* hide images until carousel can handle them */
+    cursor: pointer; /* otherwise it's not as obvious items can be clicked */
+}
+
+#lbt {
+    display: none;
+    position: absolute;
+    top: 120px;
+    left: 0px;
+    z-index: 999;
+    cursor: pointer;
+
+}
+
+#rbt {
+    display: none;
+    position: absolute;
+    top: 120px;
+    right: 0px;
+    z-index: 999;
+    cursor: pointer;
+}
