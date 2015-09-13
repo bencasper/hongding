@@ -117,9 +117,9 @@ a:active {
     width: 93px;
 }
 
-.navigation ul li a:link, .nav1 ul li a:active, .nav1 ul li a:visited {
+.navigation ul li a:link, .navigation ul li a:active, .navigation ul li a:visited {
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 18px;
     height: 38px;
     line-height: 38px;
 }

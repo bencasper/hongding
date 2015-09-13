@@ -1,4 +1,3 @@
-from core import views
 import os
 
 from django.conf.urls import patterns, include, url
@@ -18,9 +17,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
-    url(r'search/$', views.search, name='search'),
-
 
     url(r'', include(wagtail_urls)),
 )
