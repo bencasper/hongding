@@ -1,0 +1,38 @@
+{% load wagtailimages_tags static wagtailcore_tags %}
+<div>
+    <div>
+        <ul>
+            <li class="navtag selected l">生产技术</li>
+            <li class="navtag l">行业新闻</li>
+        </ul>
+    </div>
+    <div><img src="{% static "images/d-line-title.jpg" %}"></div>
+    <div id="tech-tag">
+        <ul>
+            {% for techPage in techs %}
+                <li><a href="{% pageurl techPage %}">{{ techPage.title }}</a> </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="news-tag" style="display: none;">
+        <ul>
+            {% for newsPage in news %}
+                <li><a href="{% pageurl newsPage %}">{{ newsPage.title }}</a> </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(".navtag").mouseover(function(){
+        $(this).addClass("selected");
+        $(this).siblings().removeClass("selected");
+        if($(this).text() == '生产技术'){
+            $('#tech-tag').show();
+            $('#news-tag').hide();
+        }else{
+            $('#tech-tag').hide();
+            $('#news-tag').show();
+        }
+    })
+</script>

@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-div, ul, li, ol, p, span, em, i, dl, dt, dd, from, input, h1, h3, h2, img {
+div, ul, li, ol, p, span, em, i, dl, dt, dd, form, input, h1, h3, h2, img {
     margin: 0;
     padding: 0;
 }
@@ -13,6 +13,8 @@ body {
     font-family: "宋体";
     font-size: 14px;
     margin: 0;
+    background-color: #ededed;
+
 }
 
 ul, li {
@@ -70,28 +72,19 @@ a:active {
     text-decoration: none;
 }
 
-#top-container {
+.header {
     background: url("../images/top_bg.jpg") no-repeat scroll center top transparent;
     padding-top: 10px;
     height: auto;
     width: 100%;
-    position: relative;
+}
+.top{
+    padding-top: 20px;
+    padding-left: 100px;
 }
 
-.logo {
-    top:30px;
-    left: 100px;
-    height: 58px;
-    width: 195px;
-    position: absolute;
-
-}
-
-.nav-container {
-    padding-top: 30px;
-    padding-left: 350px;
-    height: 45px;
-    width: 768px;
+.nav-bar{
+    margin-left:30px;
 }
 
 .navigation {
@@ -151,6 +144,9 @@ a:active {
     cursor: pointer; /* otherwise it's not as obvious items can be clicked */
 }
 
+.content {
+    padding-left: 100px;
+}
 #lbt {
     display: none;
     position: absolute;
@@ -169,3 +165,22 @@ a:active {
     z-index: 999;
     cursor: pointer;
 }
+
+.navtag {
+    background: url("../images/tag-unselect.gif") no-repeat scroll left center transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 26px;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+    width: 79px;
+}
+
+.selected {
+    background: url("../images/tag-select.gif") no-repeat scroll left bottom transparent;
+}
+

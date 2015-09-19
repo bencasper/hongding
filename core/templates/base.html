@@ -3,63 +3,124 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>鸿鼎环保科技有限公司 | 打造环保行业领军企业</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="{% static "js/carousel/jquery.waterwheelCarousel.min.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/carousel/mycarousel.js"%}"></script>
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>鸿鼎环保科技有限公司 | 打造环保行业领军企业</title>
+    <link rel="shortcut icon" href="{% static "images/favicon.ico" %}">
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    <script type="text/javascript" src="{% static "js/jquery/jquery-1.9.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/carousel/jquery.waterwheelCarousel.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/carousel/mycarousel.js" %}"></script>
 
-        <link rel="stylesheet" type="text/x-scss" href="{% static 'css/hongding.css' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'css/hongding.css' %}">
 
-        {% block extra_css %}
-            
+    {% block extra_css %}
+
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+<div class="container header">
+    <div class="row top">
+        <div class="col-md-2">
+            <a href="http://www.hongdingenv.com">
+                <img style="position:absolute;top:-25px;left:80px;z-index:999;"
+                     src="{% static "images/hd-logo.png" %}" width="116" height="103">
+            </a>
+        </div>
+        {% block menu %}
+            {% get_site_root as site_root %}
+            {% top_menu parent=site_root calling_page=self %}
         {% endblock %}
-    </head>
-
-    <body class="{% block body_class %}{% endblock %}">
-        <div id="top-container">
-
-            <div class="logo">
-                <a href="http://www.hongdingenv.com">
-                  <img style="position:absolute;top:-25px;left:80px;z-index:999;" src="{% static "images/hd-logo.png" %}" width="116" height="103">
-                </a>
-            </div>
-            {% block menu %}
-                {% get_site_root as site_root %}
-                {% top_menu parent=site_root calling_page=self %}
-            {% endblock %}
-
+    </div>
+    <div class="row">
+        {% block carousels %}
             {% carousels %}
-        </div>
-        <div class="main container">
-
-            {% breadcrumbs %}
-
-            {% block heading %}
-                <div class="page-header">
-                    <h1>{{ self.title }}</h1>
-                </div>
-            {% endblock %}
-
-            {% block content %}{% endblock %}
-
-
-        </div>
-
-        {% adverts %}
-
-        {% compress js %}
-            
-            <script type="text/javascript" src="{% static 'js/hongding.js' %}"></script>
-        {% endcompress %}
-
-        {% block extra_js %}
-            
         {% endblock %}
-    </body>
+    </div>
+</div>
+<div class="main container">
+
+    {% breadcrumbs %}
+
+    {% block content %}{% endblock %}
+
+    {% block relate_link %}
+        <div class="row">
+            <div class="col-md-11">
+                <ul>
+                    <li class="l">
+                        <a target="_blank" href="http://www.chinacement.org">
+                            <img width="90" height="40" border="1" src="{% static "images/zgsnzz.gif" %}">
+                        </a>
+                    </li>
+                    <li class="l">
+                        <a target="_blank" href="http://www.dcement.com">
+                            <img width="90" height="40" border="1"
+                                 src="{% static "images/digitalcement.gif" %}">
+                        </a>
+                    </li>
+                    <li class="l">
+                        <a target="_blank" href="http://www.sngyw.com">
+                            <img width="90" height="40" border="1"
+                                 src="{% static "images/gongyiwang.gif" %}">
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+    {% endblock %}
+    <div class="row">
+        <img src="{% static "images/d-line.jpg" %}"
+    </div>
+    <div class="row">
+        <div class="col-md-3"><span style="color: red;font:18px bolder;">诚信&nbsp;Integrity&nbsp;&nbsp;</span></div>
+        <div class="col-md-3"><span style="color: coral;font:18px bolder;">激情&nbsp;Enthusiasm&nbsp;&nbsp;</span>
+        </div>
+        <div class="col-md-3"><span style="color:green;font:18px bolder;">合作&nbsp;Cooperation&nbsp;&nbsp;</span>
+        </div>
+        <div class="col-md-3"><span style="color: #4169E1;font:18px bolder;">共赢&nbsp;Win-win&nbsp;&nbsp;</span>
+        </div>
+    </div>
+</div>
+<div class="footer container">
+    <div class="row">
+        <div class="col-md-8">
+            <ul>
+                <li>版权所有 <span style="font-weight: bolder;">&#169;</span> <a
+                        href="http://www.hongdingenv.com">盐城鸿鼎环保科技有限公司</a> . All
+                    Rights Reserved.&nbsp;&nbsp;地址：盐城市经济开发区步凤镇&nbsp;&nbsp;邮编：224045
+                </li>
+                <li>电话/传真：+86—515-8865 8879&nbsp;&nbsp;Email:<a href="mailto:hnzghb@126.com">JSHDHB@163.com</a>&nbsp;&nbsp;&nbsp;网址：<a
+                        href="http://www.hongdingenv.com">http://www.hongdingenv.com</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <img src="{% static "images/verifywebsite.jpg" %}">
+        </div>
+    </div>
+
+
+</div>
+
+{% adverts %}
+
+{% compress js %}
+
+    <script type="text/javascript" src="{% static 'js/hongding.js' %}"></script>
+{% endcompress %}
+
+{% block extra_js %}
+    <script language="javascript" src="http://code.54kefu.net/kefu/js/5/385805.js" charset="utf-8"></script>
+{% endblock %}
+</body>
 </html>

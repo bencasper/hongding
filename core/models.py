@@ -93,8 +93,8 @@ class CarouselItem(LinkFields):
 
 register_snippet(CarouselItem)
 
-# Related links
 
+# Related links
 class RelatedLink(LinkFields):
     title = models.CharField(max_length=255, help_text="Link title")
 
@@ -119,12 +119,14 @@ class HomePage(Page):
     class Meta:
         verbose_name = "Homepage"
 
+
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
 ]
 
 HomePage.promote_panels = Page.promote_panels
+
 
 class ProductPage(Page):
     pass
@@ -138,6 +140,8 @@ class NewsPage(Page):
     pass
 
 
+class TechsPage(Page):
+    pass
 class AdvertPlacement(models.Model):
     page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
     advert = models.ForeignKey('core.Advert', related_name='+')

@@ -2,7 +2,7 @@ from datetime import date
 from django import template
 from django.conf import settings
 
-from core.models import ProductPage, ProjectPage, NewsPage, Advert, Page, CarouselItem
+from core.models import ProductPage, ProjectPage, NewsPage, Advert, Page, CarouselItem, TechsPage
 
 register = template.Library()
 
@@ -104,3 +104,12 @@ def breadcrumbs(context):
         'ancestors': ancestors,
         'request': context['request'],
     }
+
+
+@register.inclusion_tag("core/tags/newstechs.html", takes_context=True)
+def newstechs(context):
+    return {
+        'news': NewsPage.objects.all()[:8],
+        'techs': TechsPage.objects.all()[:8]
+    }
+    pass

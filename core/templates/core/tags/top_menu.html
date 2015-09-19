@@ -1,0 +1,20 @@
+{% load core_tags static wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+<div class="col-md-8 nav-bar">
+    <div class="row">
+        <img src="{% static "images/menu_h.jpg" %}" class="l"/>
+        <div class="navigation">
+            <ul class="menu">
+               {# Link to home page #}
+                <li><a href="{% pageurl site_root %}">{{ site_root.title }}</a></li>
+                {% for menuitem in menuitems %}
+                    <li>
+                        <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <img src="{% static "images/menu_t.jpg" %}" class="l"/>
+        </div>
+</div>
