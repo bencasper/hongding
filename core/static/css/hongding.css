@@ -184,3 +184,7 @@ a:active {
     background: url("../images/tag-select.gif") no-repeat scroll left bottom transparent;
 }
 
+
+.footer {
+    padding-left: 120px;
+}

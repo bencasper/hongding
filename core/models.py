@@ -1,3 +1,5 @@
+#!python
+# -*- coding: utf-8 -*-
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import PageChooserPanel, FieldPanel, MultiFieldPanel, InlinePanel
@@ -129,7 +131,29 @@ HomePage.promote_panels = Page.promote_panels
 
 
 class ProductPage(Page):
-    pass
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    content = RichTextField(blank=True)
+    search_fields = Page.search_fields + (
+        index.SearchField('content'),
+    )
+
+    class Meta:
+        verbose_name = u"产品页"
+
+
+ProductPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    ImageChooserPanel('image'),
+    FieldPanel('content', classname="full"),
+]
+
+ProductPage.promote_panels = Page.promote_panels
 
 
 class ProjectPage(Page):
@@ -142,6 +166,8 @@ class NewsPage(Page):
 
 class TechsPage(Page):
     pass
+
+
 class AdvertPlacement(models.Model):
     page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
     advert = models.ForeignKey('core.Advert', related_name='+')

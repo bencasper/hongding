@@ -1,0 +1,120 @@
+{% load static wagtailimages_tags core_tags wagtailcore_tags %}
+<div class="row" id="scroller" style="height: 160px; margin: 0 auto;">
+    <div class="innerScrollArea col-md-10">
+        <ul>
+            <!-- Define photos here -->
+            {% for product in productsWithImg %}
+                <li>
+                    <a href="{% pageurl product %}">
+                        {% image product.image min-160x120 as productImg %}
+                        <img src="{{ productImg.url }}" width="160" height="120"/>
+                        <span>{{ product.title }}</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="nullBox">
+                        <img src="{% static "images/place-holder.png" %}" width="5"/>
+                    </div>
+                </li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+</div>
+<style>
+    #scroller {
+        position: relative;
+    }
+
+    #scroller .innerScrollArea {
+        overflow: hidden;
+        position: absolute;
+        margin-left: 30px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #scroller .innerScrollArea a {
+        display: block;
+    }
+
+    #scroller .innerScrollArea img {
+        display: block;
+    }
+
+    #scroller .innerScrollArea span {
+        display: block;
+        padding-left: 10px;
+    }
+
+    #scroller ul {
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
+
+    #scroller li {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        position: absolute;
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        var scroller = $('#scroller div.innerScrollArea');
+        var scrollerContent = scroller.children('ul');
+        scrollerContent.children().clone().appendTo(scrollerContent);
+        var curX = 0;
+        var picNum = 0;
+        var picMarginLeft = $("#scroller li").css("margin-right").replace(/[^-\d\.]/g, '');
+        scrollerContent.children().each(function () {
+            var $this = $(this);
+            $this.css('left', curX);
+            //console.log('outWidth:' + $this.outerWidth(true));
+            curX += $this.outerWidth(true);
+            picNum += 1;
+        });
+        var fullW = curX / 2;
+        var viewportW = scroller.width(); //this guy is fixed
+        //console.log("viewportW:" + viewportW);
+        // Scrolling speed management
+        var controller = {curSpeed: 0, fullSpeed: 2};
+        var $controller = $(controller);
+        var tweenToNewSpeed = function (newSpeed, duration) {
+            if (duration === undefined)
+                duration = 600;
+            $controller.stop(true).animate({curSpeed: newSpeed}, duration);
+        };
+
+        // Pause on hover
+        scroller.hover(function () {
+            tweenToNewSpeed(0);
+        }, function () {
+            tweenToNewSpeed(controller.fullSpeed);
+        });
+        var initScrollLeft = scroller.scrollLeft();
+        //console.log("initScrollLeft:" + initScrollLeft);
+        //viewportW equals clientWidth
+        //console.log(" element.scrollWidth " + scroller.get(0).scrollWidth + "clientWidth" + scroller.get(0).clientWidth);
+        // Scrolling management; start the automatical scrolling
+        var doScroll = function () {
+            var curXScroll = scroller.scrollLeft(); //begin
+            //console.log("curXScroll:"+curXScroll);
+            var newX = curXScroll + controller.curSpeed;
+            //console.log("scroll length needed:"+fullW);
+            if (newX > fullW)
+                newX = initScrollLeft;
+            //console.log(newX);
+            scroller.scrollLeft(newX);
+            //console.log("new scroll:"+scroller.scrollLeft());
+        };
+        setInterval(doScroll, 30);
+        tweenToNewSpeed(controller.fullSpeed);
+    });
+</script>

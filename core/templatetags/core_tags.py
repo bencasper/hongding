@@ -110,6 +110,16 @@ def breadcrumbs(context):
 def newstechs(context):
     return {
         'news': NewsPage.objects.all()[:8],
-        'techs': TechsPage.objects.all()[:8]
+        'techs': TechsPage.objects.all()[:8],
+        'request': context['request']
+    }
+
+
+@register.inclusion_tag("core/tags/scrollProduct.html", takes_context=True)
+def scrollProduct(context):
+    return {
+        "productsWithImg": ProductPage.objects.live().exclude(image=None),
+        'request': context['request'],
+
     }
     pass
