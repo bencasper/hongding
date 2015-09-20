@@ -92,8 +92,26 @@ class CarouselItem(LinkFields):
     def __unicode__(self):
         return self.caption
 
+    class Meta:
+        verbose_name = u"头部滚动图"
+
 
 register_snippet(CarouselItem)
+
+
+# product type
+class ProductType(models.Model):
+    id = models.AutoField(primary_key=True)
+    typename = models.CharField(max_length=255, blank=False)
+
+    def __unicode__(self):
+        return self.typename
+
+    class Meta:
+        verbose_name = u"产品技术类型"
+
+
+register_snippet(ProductType)
 
 
 # Related links
@@ -143,12 +161,34 @@ class ProductPage(Page):
         index.SearchField('content'),
     )
 
+    typeDic = ProductType.objects.all();
+    TYPES = []
+    for type in typeDic:
+        typeTuple = (type.id, type.typename)
+        TYPES.append(typeTuple)
+    """
+    TYPES = (
+        (1, u"脱销装备"),
+        (2, u"袋式除尘器系列"),
+        (3, u"选粉机系列"),
+        (4, u"烘干机系列"),
+        (5, u"除尘配件"),
+        (6, u"哈德逊谁技术膜处理方案"),
+        (7, u"阻垢剂")
+    ) """
+
+
+    type = models.CharField(max_length=2,
+                            choices=TYPES,
+                            default=1)
+
     class Meta:
         verbose_name = u"产品页"
 
 
 ProductPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('type'),
     ImageChooserPanel('image'),
     FieldPanel('content', classname="full"),
 ]
