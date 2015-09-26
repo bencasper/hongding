@@ -1,0 +1,26 @@
+{% load wagtailimages_tags static wagtailcore_tags %}
+<div class="row" style="padding-top:7px">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{% static "images/intro.jpg" %}"/>
+        </div>
+        <div class="col-md-2">
+            {% if intro %}
+                <a href="{% pageurl intro %}"><img src="{% static "images/more-link.jpg" %}"></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row"><img src="{% static "images/line-intro.jpg" %}"></div>
+    <div class="row">
+        <div class="col-md-10">
+            {% if intro %}
+                {% image intro.image fill-200x100 as intoImg %}
+                <img alt="" src="{{ intoImg.url }}" style="float: left;padding-top: 5px;padding-right: 5px;">
+                <span>
+                    {{ intro.content|truncatechars:320 }}<a href="{% pageurl intro %}"><span style="color: #ff8000">【点击详情>>】</span></a>
+                </span>
+            {% endif %}
+        </div>
+    </div>
+</div>

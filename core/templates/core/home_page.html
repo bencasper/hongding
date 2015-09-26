@@ -7,22 +7,23 @@
 {% block content %}
     <div class="container content">
         <div class="row" style="padding:10px 0px 10px 0px;">
-            <div class="col-md-3"><span style="color: red;font:18px bolder;">诚信&nbsp;Integrity&nbsp;&nbsp;</span></div>
-            <div class="col-md-3"><span style="color: coral;font:18px bolder;">激情&nbsp;Enthusiasm&nbsp;&nbsp;</span>
-            </div>
-            <div class="col-md-3"><span style="color:green;font:18px bolder;">合作&nbsp;Cooperation&nbsp;&nbsp;</span>
-            </div>
-            <div class="col-md-3"><span style="color: #4169E1;font:18px bolder;">共赢&nbsp;Win-win&nbsp;&nbsp;</span>
-            </div>
+            <span style="color: red;font:18px bolder;padding-left:10%;">诚信&nbsp;Integrity&nbsp;&nbsp;</span>
+            <span style="color: coral;font:18px bolder;padding-left:10%;">激情&nbsp;Enthusiasm&nbsp;&nbsp;</span>
+            <span style="color:green;font:18px bolder;padding-left:10%;">合作&nbsp;Cooperation&nbsp;&nbsp;</span>
+            <span style="color: #4169E1;font:18px bolder;padding-left:10%;">共赢&nbsp;Win-win&nbsp;&nbsp;</span>
         </div>
 
 
         <div class="row" style="height: 300px">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 {% newstechs %}
             </div>
-            <div class="col-md-5"></div>
-            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                {% intro %}
+            </div>
+            <div class="col-md-3">
+                {% contact %}
+            </div>
         </div>
         <div class="row">
             <div class="col-md-9"><img src="{% static "images/product-intro.jpg" %}"/></div>

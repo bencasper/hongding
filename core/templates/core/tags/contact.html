@@ -1,0 +1,35 @@
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
+<div class="row" style="padding-top:7px">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{% static "images/contact.jpg" %}"/>
+        </div>
+        <div class="col-md-2">
+            {% if contact %}
+                <a href="{% pageurl contact %}"><img src="{% static "images/more-link.jpg" %}"></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row"><img src="{% static "images/line-contact.jpg" %}"></div>
+    <div class="row">
+        {% if contact %}
+        <a href="{% pageurl contact %}"><img src="{% static "images/hongdingmap.png" %}" width="240" height="120"></a>
+        {% endif %}
+    </div>
+    <div class="row">
+        {% if contact %}
+            <div class="col-md-10">
+               <ul>
+                  <li>地址：{{ contact.address }}</li>
+                  <li>邮编：{{ contact.post_code }}</li>
+                  <li>电话/传真：+86—{{ contact.telephone }}</li>
+                  <li>手机：{{ contact.mobile }}</li>
+                  <li>Email:{{ contact.email }}</li>
+                  <li>网址：www.hongdingenv.com</li>
+               </ul>
+              </div>
+        {% endif %}
+    </div>
+
+</div>

@@ -2,7 +2,8 @@ from datetime import date
 from django import template
 from django.conf import settings
 
-from core.models import ProductPage, ProjectPage, NewsPage, Advert, Page, CarouselItem, TechsPage
+from core.models import ProductPage, ProjectPage, NewsPage, Advert, Page, CarouselItem, TechsPage, IntroPage, \
+    ContactPage
 
 register = template.Library()
 
@@ -111,9 +112,28 @@ def newstechs(context):
     return {
         'news': NewsPage.objects.all()[:8],
         'techs': TechsPage.objects.all()[:8],
-        'request': context['request']
+        'request': context['request'],
     }
 
+@register.inclusion_tag("core/tags/intro.html", takes_context=True)
+def intro(context):
+    introList = IntroPage.objects.filter(type=1)
+    if len(introList) > 0:
+        intro = introList[len(introList)-1]
+    return {
+        'intro': intro,
+        'request': context['request'],
+    }
+
+@register.inclusion_tag('core/tags/contact.html', takes_context=True)
+def contact(context):
+    contactPageList = ContactPage.objects.all()
+    if len(contactPageList) > 0:
+        contact = contactPageList[len(contactPageList) - 1] # use the last contact page
+        return {
+            'contact': contact,
+            'request': context['request']
+        }
 
 @register.inclusion_tag("core/tags/scrollProduct.html", takes_context=True)
 def scrollProduct(context):

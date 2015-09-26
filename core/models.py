@@ -50,20 +50,25 @@ class LinkFields(models.Model):
 
 class ContactFields(models.Model):
     telephone = models.CharField(max_length=20, blank=True)
+    mobile = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
-    address_1 = models.CharField(max_length=255, blank=True)
+    address = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
     post_code = models.CharField(max_length=10, blank=True)
+    website = models.CharField(max_length=20, blank=True)
 
     panels = [
         FieldPanel('telephone'),
+        FieldPanel('mobile'),
         FieldPanel('email'),
-        FieldPanel('address_1'),
+        FieldPanel('address'),
         FieldPanel('city'),
         FieldPanel('country'),
         FieldPanel('post_code'),
+        FieldPanel('website'),
     ]
+
 
     class Meta:
         abstract = True
@@ -161,7 +166,7 @@ class ProductPage(Page):
         index.SearchField('content'),
     )
 
-    typeDic = ProductType.objects.all();
+    typeDic = ProductType.objects.all()
     TYPES = []
     for type in typeDic:
         typeTuple = (type.id, type.typename)
@@ -177,8 +182,7 @@ class ProductPage(Page):
         (7, u"阻垢剂")
     ) """
 
-
-    type = models.CharField(max_length=2,
+    type = models.IntegerField(max_length=2,
                             choices=TYPES,
                             default=1)
 
@@ -206,6 +210,65 @@ class NewsPage(Page):
 
 class TechsPage(Page):
     pass
+
+
+class IntroPage(Page):
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    content = RichTextField(blank=True)
+    search_fields = Page.search_fields + (
+        index.SearchField('content'),
+    )
+    TYPES = ((1, u'公司简介'), (2, u'组织结构'), (3, u'领导致辞'), (4, u'企业文化'))
+    type = models.IntegerField(max_length=2,
+                            choices=TYPES,
+                            default=1)
+
+
+    class Meta:
+        verbose_name = u'公司简介'
+
+
+IntroPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('type'),
+    ImageChooserPanel('image'),
+    FieldPanel('content', classname="full"),
+]
+
+# Contact page
+
+class ContactPage(Page, ContactFields):
+    body = RichTextField(blank=True)
+    feed_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    search_fields = Page.search_fields + (
+        index.SearchField('body'),
+    )
+
+    class Meta:
+        verbose_name = u'联系我们'
+
+ContactPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('body', classname="full"),
+    MultiFieldPanel(ContactFields.panels, "Contact"),
+]
+
+ContactPage.promote_panels = Page.promote_panels + [
+    ImageChooserPanel('feed_image'),
+]
 
 
 class AdvertPlacement(models.Model):
