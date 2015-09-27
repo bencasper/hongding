@@ -1,9 +1,8 @@
-from datetime import date
 from django import template
 from django.conf import settings
 
-from core.models import ProductPage, ProjectPage, NewsPage, Advert, Page, CarouselItem, TechsPage, IntroPage, \
-    ContactPage
+from core.models import ProductPage, NewsPage, Advert, Page, CarouselItem, IntroPage, \
+    ContactPage, HeadImage
 
 register = template.Library()
 
@@ -110,8 +109,8 @@ def breadcrumbs(context):
 @register.inclusion_tag("core/tags/newstechs.html", takes_context=True)
 def newstechs(context):
     return {
-        'news': NewsPage.objects.all()[:8],
-        'techs': TechsPage.objects.all()[:8],
+        'news': NewsPage.objects.filter(type=1)[:8],
+        'techs': NewsPage.objects.filter(type=2)[:8],
         'request': context['request'],
     }
 
@@ -142,4 +141,10 @@ def scrollProduct(context):
         'request': context['request'],
 
     }
-    pass
+
+@register.inclusion_tag("core/tags/headImage.html", takes_context=True)
+def headImage(context):
+    return {
+        'headImages': HeadImage.objects.all(),
+        'request': context['request'],
+    }

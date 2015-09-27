@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
     <script type="text/javascript" src="{% static "js/jquery/jquery-1.9.1.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/carousel/jquery.waterwheelCarousel.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/carousel/mycarousel.js" %}"></script>
 
     <link rel="stylesheet" type="text/x-scss" href="{% static 'css/hongding.css' %}">
 
@@ -25,7 +24,7 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-<div class="container header">
+<div class="container {% block headerclass %}header{% endblock %}">
     <div class="row top">
         <div class="col-md-2">
             <a href="http://www.hongdingenv.com">
@@ -39,15 +38,15 @@
         {% endblock %}
     </div>
     <div class="row" style="margin-top:-40px">
-        {% block carousels %}
+        {% block banner %}
             {% carousels %}
         {% endblock %}
     </div>
 </div>
 <div class="main container">
-
+    <div class="row" style="padding-left: 60px">
     {% breadcrumbs %}
-
+    </div>
     {% block content %}{% endblock %}
 
 </div>

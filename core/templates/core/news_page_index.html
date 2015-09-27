@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block headerclass %}
+    content-header
+{% endblock %}
+{% block banner %}
+    {% headImage %}
+{% endblock %}
+
+{% block content %}
+    <div class="container content">
+
+    </div>
+
+{% endblock %}

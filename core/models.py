@@ -103,6 +103,32 @@ class CarouselItem(LinkFields):
 
 register_snippet(CarouselItem)
 
+# Head imgs
+class HeadImage(models.Model):
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    caption = models.CharField(max_length=255, blank=False)
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption')
+    ]
+
+    def __unicode__(self):
+        return self.caption
+
+    class Meta:
+        verbose_name = u'内容页头图'
+
+
+register_snippet(HeadImage)
+
+
+
 
 # product type
 class ProductType(models.Model):
@@ -200,15 +226,49 @@ ProductPage.content_panels = [
 ProductPage.promote_panels = Page.promote_panels
 
 
+class ProductIndex(Page):
+    class Meta:
+        verbose_name = u'产品首页'
+
+
 class ProjectPage(Page):
     pass
 
 
 class NewsPage(Page):
-    pass
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
 
-class TechsPage(Page):
+    content = RichTextField(blank=True)
+    search_fields = Page.search_fields + (
+        index.SearchField('content'),
+    )
+    TYPES = ((1, u'行业新闻'), (2, u'生产技术'))
+    type = models.IntegerField(max_length=2,
+                               choices=TYPES,
+                               default=1)
+
+    class Meta:
+        verbose_name = u'新闻内容'
+
+
+NewsPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('type'),
+    ImageChooserPanel('image'),
+    FieldPanel('content', classname="full"),
+]
+
+
+class NewsPageIndex(Page):
+    class Meta:
+        verbose_name = u'行业新闻首页'
     pass
 
 

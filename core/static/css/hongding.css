@@ -78,13 +78,20 @@ a:active {
     height: auto;
     width: 100%;
 }
-.top{
+
+.content-header {
+    background: url("../images/content-bg.jpg") no-repeat scroll center top transparent;
+    height: auto;
+    width: 100%;
+}
+
+.top {
     padding-top: 20px;
     padding-left: 100px;
 }
 
-.nav-bar{
-    margin-left:30px;
+.nav-bar {
+    margin-left: 30px;
 }
 
 .navigation {
@@ -112,7 +119,7 @@ a:active {
 
 .navigation ul li a:link, .navigation ul li a:active, .navigation ul li a:visited {
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 12px;
     height: 38px;
     line-height: 38px;
 }
@@ -144,9 +151,18 @@ a:active {
     cursor: pointer; /* otherwise it's not as obvious items can be clicked */
 }
 
+.banner {
+    clear: both;
+    height: 238px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 988px;
+}
+
 .content {
     padding-left: 100px;
 }
+
 #lbt {
     display: none;
     position: absolute;
@@ -183,7 +199,6 @@ a:active {
 .selected {
     background: url("../images/tag-select.gif") no-repeat scroll left bottom transparent;
 }
-
 
 .footer {
     padding-left: 120px;

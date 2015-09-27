@@ -1,0 +1,29 @@
+{% load wagtailimages_tags static wagtailembeds_tags %}
+<div class="banner" style="padding-top: 25px;">
+    {% for headImage in headImages %}
+        {% image headImage.image fill-988x238 as image %}
+        {% if forloop.counter == 1 %}
+            <img src="{{ image.url }}" class="banner-img" id="showed-img" style="display:inline;overflow: hidden"/>
+        {% else %}
+            <img src="{{ image.url }}" class="banner-img" style="display:none;overflow: hidden"/>
+        {% endif %}
+    {% endfor %}
+</div>
+<script>
+    function showImage() {
+        var showedImg = $('#showed-img');
+        //console.log(showedImg[0].src);
+        showedImg.hide();
+        showedImg.removeAttr('id');
+        if(showedImg.next('img.banner-img').length != 0){
+            //console.log(showedImg.next('img.banner-img').length);
+            showedImg.next('img.banner-img').show()
+            showedImg.next('img.banner-img').attr('id','showed-img');
+        }else{
+            $('.banner img:first').show();
+            $('.banner img:first').attr('id','showed-img');
+        }
+
+    }
+    setInterval(showImage, 5000);
+</script>
