@@ -11,8 +11,14 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
+# A couple of static contants
+
+NEWS_TYPES = ((1, u'行业新闻'), (2, u'生产技术'))
+INTRO_TYPES = ((1, u'公司简介'), (2, u'组织结构'), (3, u'领导致辞'), (4, u'企业文化'))
+
 
 # A couple of abstract classes that contain commonly used fields
+
 
 class LinkFields(models.Model):
     link_external = models.URLField("External link", blank=True)
@@ -209,8 +215,8 @@ class ProductPage(Page):
     ) """
 
     type = models.IntegerField(max_length=2,
-                            choices=TYPES,
-                            default=1)
+                               choices=TYPES,
+                               default=1)
 
     class Meta:
         verbose_name = u"产品页"
@@ -244,14 +250,12 @@ class NewsPage(Page):
         related_name='+'
     )
 
-
     content = RichTextField(blank=True)
     search_fields = Page.search_fields + (
         index.SearchField('content'),
     )
-    TYPES = ((1, u'行业新闻'), (2, u'生产技术'))
     type = models.IntegerField(max_length=2,
-                               choices=TYPES,
+                               choices=NEWS_TYPES,
                                default=1)
 
     class Meta:
@@ -267,9 +271,16 @@ NewsPage.content_panels = [
 
 
 class NewsPageIndex(Page):
+    @property
+    def newsTypes(self):
+        return NEWS_TYPES
+    @property
+    def allNews(self):
+       return NewsPage.objects.live().all()
+
+
     class Meta:
         verbose_name = u'行业新闻首页'
-    pass
 
 
 class IntroPage(Page):
@@ -284,10 +295,9 @@ class IntroPage(Page):
     search_fields = Page.search_fields + (
         index.SearchField('content'),
     )
-    TYPES = ((1, u'公司简介'), (2, u'组织结构'), (3, u'领导致辞'), (4, u'企业文化'))
     type = models.IntegerField(max_length=2,
-                            choices=TYPES,
-                            default=1)
+                               choices=INTRO_TYPES,
+                               default=1)
 
 
     class Meta:
@@ -319,6 +329,7 @@ class ContactPage(Page, ContactFields):
 
     class Meta:
         verbose_name = u'联系我们'
+
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),

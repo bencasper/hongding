@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static core_tags %}
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
 
 {% block body_class %}contentpage{% endblock %}
 {% block headerclass %}
@@ -16,10 +16,22 @@
     <div class="container content">
         <div class="row">
             <div class="col-md-2">
-                <div></div>
+                <div class="second-link">
+                    <ul class="menu">
+                        {% for key,value in self.newsTypes %}
+                            <li class="leaf first"><a href="/node/21" title="{{ value }}">{{ value }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% contactusbar %}
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10" style="padding-left: 100px;padding-top: 10px;">
+                {% for news in self.allNews %}
+                    <div class="row news-list">
+                        <a href="{% pageurl news %}" title="{{ news.title }}">{{ news.title }}</a>
+                    </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>

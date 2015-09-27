@@ -7,6 +7,7 @@ div, ul, li, ol, p, span, em, i, dl, dt, dd, form, input, h1, h3, h2, img {
     margin: 0;
     padding: 0;
 }
+
 body {
     color: #000000;
     font-family: "宋体";
@@ -15,12 +16,11 @@ body {
 
 }
 
-.homepage{
+.homepage {
 
     background-color: #ededed;
 
 }
-
 
 ul, li {
 
@@ -165,12 +165,13 @@ a:active {
 }
 
 .content {
-    #padding-left: 100px;
+    padding-bottom: 20px;
 }
 
 .subpage {
-    background: url("../images/contentpage-bg.gif");
+    #background: url("../images/contentpage-bg.gif");
 }
+
 #lbt {
     display: none;
     position: absolute;
@@ -216,6 +217,25 @@ a:active {
     padding-top: 20px;
     padding-left: 10px;
     width: 217px;
+}
+
+.second-link li {
+    background: url("../images/menu-btn.jpg") no-repeat scroll right center transparent;
+    height: 43px;
+    line-height: 43px;
+    text-indent: 40px;
+    width: 217px;
+}
+
+.news-list{
+    background: url('../images/content-list-btn.gif') no-repeat 10% 35%;
+    padding-left:120px;
+    padding-bottom: 10px;
+}
+
+.news-list a:link {
+    color: #027AC6;
+    font-size: 16px;
 }
 
 .footer {
