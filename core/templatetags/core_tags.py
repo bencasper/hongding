@@ -148,3 +148,16 @@ def headImage(context):
         'headImages': HeadImage.objects.all(),
         'request': context['request'],
     }
+
+
+@register.inclusion_tag("core/tags/contactusbar.html", takes_context=True)
+def contactusbar(context):
+    contactPageList = ContactPage.objects.all()
+    if len(contactPageList) > 0:
+        contact = contactPageList[len(contactPageList) - 1]  # use the last contact page
+        return {
+            'contact': contact,
+            'request': context['request']
+        }
+
+

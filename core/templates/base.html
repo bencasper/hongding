@@ -43,8 +43,8 @@
         {% endblock %}
     </div>
 </div>
-<div class="main container">
-    <div class="row" style="padding-left: 60px">
+<div class="main container {% block containercls %}{% endblock %}">
+    <div class="row">
     {% breadcrumbs %}
     </div>
     {% block content %}{% endblock %}

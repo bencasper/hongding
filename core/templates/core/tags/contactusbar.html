@@ -1,0 +1,16 @@
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
+
+<div class="contactus">
+    <span><b>联系我们 </b>| Contact us</span>
+
+    <div class="contactus-ul">
+        <ul>
+
+            <li><b>电话/传真：</b>+86-{{ contact.telephone }}</li>
+            <li><b>手机：</b>{{ contact.mobile }}</li>
+            <li><b>Email:</b>{{ contact.email }}<li/>
+            <li><b>地址：</b>{{ contact.address }}</li>
+            <li><b>邮编：</b>{{ contact.post_code }}</li>
+        </ul>
+    </div>
+</div>

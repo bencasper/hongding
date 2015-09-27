@@ -2,17 +2,25 @@
 
 {% load static core_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block body_class %}contentpage{% endblock %}
 {% block headerclass %}
     content-header
 {% endblock %}
 {% block banner %}
     {% headImage %}
 {% endblock %}
-
+{% block containercls %}
+    subpage
+{% endblock %}
 {% block content %}
     <div class="container content">
-
+        <div class="row">
+            <div class="col-md-2">
+                <div></div>
+                {% contactusbar %}
+            </div>
+            <div class="col-md-10">
+            </div>
+        </div>
     </div>
-
 {% endblock %}

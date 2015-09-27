@@ -7,15 +7,20 @@ div, ul, li, ol, p, span, em, i, dl, dt, dd, form, input, h1, h3, h2, img {
     margin: 0;
     padding: 0;
 }
-
 body {
     color: #000000;
     font-family: "宋体";
     font-size: 14px;
     margin: 0;
+
+}
+
+.homepage{
+
     background-color: #ededed;
 
 }
+
 
 ul, li {
 
@@ -160,9 +165,12 @@ a:active {
 }
 
 .content {
-    padding-left: 100px;
+    #padding-left: 100px;
 }
 
+.subpage {
+    background: url("../images/contentpage-bg.gif");
+}
 #lbt {
     display: none;
     position: absolute;
@@ -198,6 +206,16 @@ a:active {
 
 .selected {
     background: url("../images/tag-select.gif") no-repeat scroll left bottom transparent;
+}
+
+.contactus-ul ul {
+    background: url("../images/contactusbar-bg.jpg") no-repeat -50% 100%;
+    font-size: 12px;
+    height: 160px;
+    line-height: 20px;
+    padding-top: 20px;
+    padding-left: 10px;
+    width: 217px;
 }
 
 .footer {
