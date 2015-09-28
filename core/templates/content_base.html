@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
+
+{% block body_class %}contentpage{% endblock %}
+{% block headerclass %}
+    content-header
+{% endblock %}
+{% block banner %}
+    {% headImage %}
+{% endblock %}
+{% block containercls %}
+    subpage
+{% endblock %}
+{% block content %}
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-2">
+                {% contactusbar %}
+            </div>
+            <div class="col-md-10" style="padding-left: 60px;padding-top: 10px;">
+                {% block singlecontent %}
+                    {% include "core/includes/content.html" with content=self.content title=self.title only %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

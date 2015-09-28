@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
+
+{% block body_class %}contentpage{% endblock %}
+{% block headerclass %}
+    content-header
+{% endblock %}
+{% block banner %}
+    {% headImage %}
+{% endblock %}
+{% block containercls %}
+    subpage
+{% endblock %}
+{% block content %}
+    <div class="container content">
+        <div class="row">
+            <ul>
+                  <li>地址：{{ self.address }}</li>
+                  <li>邮编：{{ self.post_code }}</li>
+                  <li>电话/传真：+86—{{ self.telephone }}</li>
+                  <li>手机：{{ self.mobile }}</li>
+                  <li>Email:{{ self.email }}</li>
+                  <li>网址：www.hongdingenv.com</li>
+               </ul>
+        </div>
+        <div class="row">
+            {% include "core/includes/baidumap.html" %}
+        </div>
+    </div>
+{% endblock %}
