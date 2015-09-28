@@ -3,7 +3,6 @@
 {% block singlecontent %}
     {% if self.content %}
         <div class="body-content">
-            <span class="title">{{ self.title }}</span>
             {% if self.image %}
                 {% image self.image fill-200x150 as img %}
                 <div style="float: left;padding: 10px;"><img src="{{ img.url }}"> </div>

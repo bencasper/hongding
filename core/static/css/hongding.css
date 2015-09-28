@@ -214,6 +214,10 @@ a:active {
     clear: both;
 }
 
+
+.rich-text{
+    line-height: 200%;
+}
 .subpage {
     #background: url("../images/contentpage-bg.gif");
 }

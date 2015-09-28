@@ -16,6 +16,16 @@
     <div class="container content">
         <div class="row">
             <div class="col-md-2">
+                <div class="second-link">
+                    <ul class="menu">
+                        {% if self.types %}
+                            {% for key,value in self.types %}
+                                <li class="leaf"><a href="{{ self.baseUrl }}type/{{ key }}"
+                                                    title="{{ value }}">{{ value }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
                 {% contactusbar %}
             </div>
             <div class="col-md-10" style="padding-left: 60px;padding-top: 10px;">

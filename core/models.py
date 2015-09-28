@@ -1,11 +1,13 @@
 #!python
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.http import Http404
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import PageChooserPanel, FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
 
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -233,6 +235,22 @@ ProductPage.promote_panels = Page.promote_panels
 
 
 class ProductIndex(Page):
+    products = ProductPage.objects.all()
+    @property
+    def productTypes(self):
+        return ProductType.objects.all()
+
+    def route(self, request, path_components):
+        if path_components:
+            route = path_components[0]
+            if route == "type":
+                type = path_components[1]
+                self.products = ProductPage.objects.filter(type=type)
+                # tell Wagtail to call self.serve() with an additional 'path_components' kwarg
+                return RouteResult(self, kwargs={'path_components': path_components})
+
+        return super(ProductIndex, self).route(request, path_components)
+
     class Meta:
         verbose_name = u'产品首页'
 
@@ -271,12 +289,22 @@ NewsPage.content_panels = [
 
 
 class NewsPageIndex(Page):
+    newsList = NewsPage.objects.all()
     @property
     def newsTypes(self):
         return NEWS_TYPES
-    @property
-    def allNews(self):
-       return NewsPage.objects.live().all()
+
+    def route(self, request, path_components):
+        if path_components:
+            route = path_components[0]
+            if route == 'type':
+                type = path_components[1]
+                self.newsList = NewsPage.objects.filter(type=type)
+                # tell Wagtail to call self.serve() with an additional 'path_components' kwarg
+                return RouteResult(self, kwargs={'path_components': path_components})
+
+        return super(NewsPageIndex, self).route(request, path_components)
+
 
 
     class Meta:
@@ -298,6 +326,34 @@ class IntroPage(Page):
     type = models.IntegerField(max_length=2,
                                choices=INTRO_TYPES,
                                default=1)
+
+    @property
+    def types(self):
+        return INTRO_TYPES
+
+    def baseUrl(self):
+        return "/intro-hongding/"
+
+    def route(self, request, path_components):
+        if path_components:
+            route = path_components[0]
+            if route != 'type':
+                return RouteResult(self)
+
+            type = path_components[1]
+            r = list(IntroPage.objects.filter(type=type))
+            if r:
+                self.content = r[0].content
+            else:
+                self.content = ''
+            # tell Wagtail to call self.serve() with an additional 'path_components' kwarg
+            return RouteResult(self, kwargs={'path_components': path_components})
+        else:
+            if self.live:
+                # tell Wagtail to call self.serve() with no further args
+                return RouteResult(self)
+            else:
+                raise Http404
 
 
     class Meta:

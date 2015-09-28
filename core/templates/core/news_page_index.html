@@ -19,14 +19,14 @@
                 <div class="second-link">
                     <ul class="menu">
                         {% for key,value in self.newsTypes %}
-                            <li class="leaf first"><a href="/node/21" title="{{ value }}">{{ value }}</a></li>
+                            <li class="leaf"><a href="/news/type/{{ key }}" title="{{ value }}">{{ value }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 {% contactusbar %}
             </div>
             <div class="col-md-10" style="padding-left: 100px;padding-top: 10px;">
-                {% for news in self.allNews %}
+                {% for news in self.newsList %}
                     <div class="row news-list">
                         <a href="{% pageurl news %}" title="{{ news.title }}">{{ news.title }}</a>
                     </div>

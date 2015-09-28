@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags static core_tags wagtailcore_tags %}
+
+{% block body_class %}contentpage{% endblock %}
+{% block headerclass %}
+    content-header
+{% endblock %}
+{% block banner %}
+    {% headImage %}
+{% endblock %}
+{% block containercls %}
+    subpage
+{% endblock %}
+{% block content %}
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="second-link">
+                    <ul class="menu">
+                        {% for type in self.productTypes %}
+                            <li class="leaf"><a href="/product-index/type/{{ type.id }}" title="{{ type.typename }}">{{ type.typename }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% contactusbar %}
+            </div>
+            <div class="col-md-10" style="padding-left: 100px;padding-top: 10px;">
+                {% for product in self.products %}
+                    <a href="{% pageurl product %}" title="{{ product.title }}">
+                        <div style="padding-left: 30px;padding-bottom:20px;float: left">
+                            {% image product.image fill-400x300 as image %}
+                            <ul>
+                                <li style="overflow: hidden"><img src="{{ image.url }}" width="400" height="300"></li>
+                                <li style="text-align: center">{{ product.title }}</li>
+                            </ul>
+                        </div>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
